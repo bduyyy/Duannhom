@@ -1,72 +1,264 @@
 package duan;
-public class demo {
-	public static void main(String[] args) throws IOException {
-		hospitalstaffList list = new hospitalstaffList();
-		list.input();
 
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+interface Iemployee {
+	double countofsalary();
+}
+
+abstract class hospitalstaff implements Iemployee {
+
+	int ID;
+	private int Age;
+	String Name;
+	private String Gender;
+	private String Birthday;
+	private String Birthplace;
+	private String People;
+	private String Address;
+	private String Phonenumber;
+	private double Basicsalary;
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
+
+	public int getAge() {
+		return Age;
+	}
+
+	public void setAge(int age) {
+		Age = age;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public String getGender() {
+		return Gender;
+	}
+
+	public void setGender(String gender) {
+		Gender = gender;
+	}
+
+	public String getBirthday() {
+		return Birthday;
+	}
+
+	public void setBirthday(String birthday) {
+		Birthday = birthday;
+	}
+
+	public String getBirthplace() {
+		return Birthplace;
+	}
+
+	public void setBirthplace(String birthplace) {
+		Birthplace = birthplace;
+	}
+
+	public String getPeople() {
+		return People;
+	}
+
+	public void setPeople(String people) {
+		People = people;
+	}
+
+	public String getAddress() {
+		return Address;
+	}
+
+	public void setAddress(String Address) {
+		this.Address = Address;
+	}
+
+	public String getPhonenumber() {
+		return Phonenumber;
+	}
+
+	public void setPhonenumber(String phonenumber) {
+		Phonenumber = phonenumber;
+	}
+
+	public double getBasicsalary() {
+		return Basicsalary;
+	}
+
+	public void setBasicsalary(double basicsalary) {
+		Basicsalary = basicsalary;
+	}
+
+	public hospitalstaff(int iD, int age, String name, String gender, String birthday, String birthplace, String people,
+			String Address, String phonenumber, double basicsalary) {
+		super();
+		ID = iD;
+		Age = age;
+		Name = name;
+		Gender = gender;
+		Birthday = birthday;
+		Birthplace = birthplace;
+		People = people;
+		Address = Address;
+		Phonenumber = phonenumber;
+		Basicsalary = basicsalary;
+	}
+
+	hospitalstaff() {
+		this.ID = 0;
+		this.Age = 0;
+		this.Name = "";
+		this.Gender = "";
+		this.Birthday = "";
+		this.Birthplace = "";
+		this.People = "";
+		this.Address = "";
+		this.Phonenumber = "";
+		this.Basicsalary = 0;
+
+	}
+
+	void input() {
 		Scanner sc = new Scanner(System.in);
-		int chucnang;
+		System.out.print("ID: ");
+		this.setID(sc.nextInt());
+		sc.nextLine();
 
-		while (true) {
-			System.out.println("\n--------\n");
-			System.out.println("1.Export array.");
-			System.out.println("2.Sort salary from high to low.");
-			System.out.println("3.Print the employee with the highest salary and save it to the file.");
-			System.out.println("4.Search employee by ID.");
-			System.out.println("5.Update employee information.");
-			System.out.println("6.Delete employee.");
-			System.out.println("7.Search for employee by name.");
-			System.out.println("8.Calculate the total of all employee salary.");
-			System.out.println("9.Thoat khoi chuong trinh");
+		System.out.print("Age: ");
+		this.setAge(sc.nextInt());
+		sc.nextLine();
 
-			System.out.println("ENTER FUNCTION:");
-			chucnang = sc.nextInt();
-			sc.nextLine();
-			switch (chucnang) {
-			case 1:
-				System.out.println("Export array:");
-				list.output();
-				break;
-			case 2:
-				System.out.println("Nextwork after sort from high to low according to salary:");
-				list.sort();
-				list.output();
-				break;
-			case 3:
-				list.sort();
-				System.out.println("The employee with the highest salary is:");
-				list.the_best_staff_of_file();
-				break;
-			case 4:
-				int timkiem;
-				System.out.println("Enter the employee ID you want to find:");
-				timkiem = sc.nextInt();
-				list.search(timkiem);
-				break;
-			case 5:
-				System.out.println("Update employee information:");
-				list.update();
-				break;
-			case 6:
-				System.out.println("Delete employee:");
-				list.delete();
-				break;
-			case 7:
-				System.out.println("Search for employee:");
-				list.find();
-				break;
-			case 8:
-				list.sumsalary();
-				break;
-			case 9:
-				System.exit(0);
-			default:
-				System.out.println("This function does not exist");
-			}
-		}
+		System.out.print("Name: ");
+		this.setName(sc.nextLine());
+
+		System.out.print("Gender: ");
+		this.setGender(sc.nextLine());
+
+		System.out.print("Birthday: ");
+		this.setBirthday(sc.nextLine());
+
+		System.out.print("Birthplace: ");
+		this.setBirthplace(sc.nextLine());
+
+		System.out.print("People: ");
+		this.setPeople(sc.nextLine());
+
+		System.out.print("Address: ");
+		this.setAddress(sc.nextLine());
+
+		System.out.print("Phonenumber: ");
+		this.setPhonenumber(sc.nextLine());
+
+		System.out.print("Basicsalary: ");
+		this.setBasicsalary(sc.nextDouble());
+
+	}
+
+	void output() {
+		System.out.println("ID:" + this.getID());
+		System.out.println("Age:" + this.getAge());
+		System.out.println("Name:" + this.getName());
+		System.out.println("Gender:" + this.getGender());
+		System.out.println("Birthday:" + this.getBirthday());
+		System.out.println("Birthplace:" + this.getBirthplace());
+		System.out.println("People:" + this.getPeople());
+		System.out.println("Address:" + this.getAddress());
+		System.out.println("Phonenumber:" + this.getPhonenumber());
+		System.out.println("Basicsalary:" + this.getBasicsalary());
+
+	}
+
+	public abstract double countofsalary();
+
+}
+
+class Doctor extends hospitalstaff {
+	private String Level;
+	private String Office;
+	private double Salarybonus;
+
+	public String getLevel() {
+		return Level;
+	}
+
+	public void setLevel(String Level) {
+		Level = Level;
+	}
+
+	public String getOffice() {
+		return Office;
+	}
+
+	public void setOffice(String Office) {
+		Office = Office;
+	}
+
+	public double getSalarybonus() {
+		return Salarybonus;
+	}
+
+	public void setSalarybonus(double salarybonus) {
+		Salarybonus = salarybonus;
+	}
+
+	public Doctor() {
+
+	}
+
+	public Doctor(int iD, int age, String name, String gender, String birthday, String birthplace, String people,
+			String Address, String phonenumber, double basicsalary, String level, String office, double salarybonus) {
+		super(iD, age, name, gender, birthday, birthplace, people, Address, phonenumber, basicsalary);
+		Level = level;
+		Office = office;
+		Salarybonus = salarybonus;
+	}
+
+	@Override
+	void input() {
+		super.input();
+		Scanner sc = new Scanner(System.in);
+
+		System.out.print("Level: ");
+		this.setLevel(sc.nextLine());
+
+		System.out.print("Office: ");
+		this.setOffice(sc.nextLine());
+
+		System.out.print("Salarybonus: ");
+		this.setSalarybonus(sc.nextDouble());
+		sc.nextLine();
+	}
+
+	void output() {
+		super.output();
+		System.out.println("Level: " + this.getLevel());
+		System.out.println("Office: " + this.getOffice());
+		System.out.println("Salarybonus: " + this.getSalarybonus());
+
+	}
+
+	@Override
+	public double countofsalary() {
+		double salary = 0;
+		salary = this.getBasicsalary() + this.getSalarybonus();
+		return salary;
+
 	}
 }
 
-
-
-	
